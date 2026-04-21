@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  debian-sandbox:
+    image: debian:latest
+    container_name: debian-sandbox
+    stdin_open: true
+    tty: true
+    command: tail -f /dev/null
+    volumes:
+      - "D:/Obsidian/WyxGenius/AI Sandbox:/workspace"
+    restart: "no"
+    ports:
+      - "8080:8080"
