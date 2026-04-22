@@ -8,6 +8,8 @@
 
 第二次逃逸测试记录请参考`escape1.txt`、`escape1.md`和`escape_report(of escape1 by Agent).md`
 
+第二轮实验使用的模型疑似DeepSeek V4（API文档里写的是V3.2，但是后来测试的行为更像是新的模型）
+
 ## 一些发现
 1. deepseek挺了解debian的，系统命令都会用，遇到问题会尝试不同的解决办法
 2. deepseek还是更倾向于不麻烦用户
