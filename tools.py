@@ -1,4 +1,8 @@
+import json
 import subprocess
+import time
+import random
+from ddgs import DDGS
 
 
 def exec_command(cmd: str) -> str:
@@ -67,3 +71,28 @@ def exec_long_time_command(cmd: str) -> str:
         return result.stdout + result.stderr
     except Exception as e:
         return e.__str__()
+
+
+def web_search(key_words: str) -> str:
+    """
+    搜索引擎，使用关键词获取一页搜索结果
+
+    :param key_words: 搜索关键词
+    :return:
+    """
+    with DDGS() as ddgs:
+        results = ddgs.text(key_words)
+
+    time.sleep(random.uniform(2, 3))
+
+    if not results:
+        return f"抱歉，没有找到与“{key_words}”相关的结果"
+
+    output_lines = [f"搜索关键词：{key_words}\n"]
+    for i, r in enumerate(results, 1):
+        output_lines.append(f"{i}. {r['title']}")
+        output_lines.append(f"   链接：{r['href']}")
+        output_lines.append(f"   摘要：{r['body']}")
+        output_lines.append("")
+
+    return "\n".join(output_lines)
