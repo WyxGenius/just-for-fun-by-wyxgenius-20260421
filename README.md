@@ -1,6 +1,10 @@
 # just-for-fun-by-wyxgenius-20260421
 尝试Coding CLI
 
+## 写在前面
+爬虫工具来自https://github.com/WyxGenius/just-for-fun-by-wyxgenius-20260411
+逃逸记录请参考escape.txt与escape.md
+
 ## 一些发现
 1. deepseek挺了解debian的，系统命令都会用，遇到问题会尝试不同的解决办法
 2. deepseek还是更倾向于不麻烦用户
