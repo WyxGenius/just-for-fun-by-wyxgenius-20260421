@@ -44,4 +44,3 @@ dependencies:
       - typing-inspection==0.4.2
       - urllib3==2.6.3
       - websockets==16.0
-prefix: C:\Users\WyxGenius\anaconda3\envs\jff-20260421
