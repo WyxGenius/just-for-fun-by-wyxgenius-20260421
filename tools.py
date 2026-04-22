@@ -1,8 +1,8 @@
-import json
 import subprocess
 import time
 import random
 from ddgs import DDGS
+from ddgs.exceptions import DDGSException
 
 
 def exec_command(cmd: str) -> str:
@@ -32,7 +32,6 @@ def exec_download_command(cmd: str) -> str:
     打开命令行并执行一条bash命令，有更长的时间限制，可以用来下载软件包。
     执行完后，命令行会关闭。
 
-    - `cd` 命令不可用
 
     :param cmd: bash命令
     :return: 执行结果
@@ -54,7 +53,6 @@ def exec_long_time_command(cmd: str) -> str:
     打开命令行并执行一条bash命令，有极长的时间限制，可以用来下载大型文件。
     执行完后，命令行会关闭。
 
-    - `cd` 命令不可用
     - 使用此工具时尽可能在后台执行任务
 
     :param cmd: bash命令
@@ -80,19 +78,23 @@ def web_search(key_words: str) -> str:
     :param key_words: 搜索关键词
     :return:
     """
-    with DDGS() as ddgs:
-        results = ddgs.text(key_words)
+    try:
+        with DDGS() as ddgs:
+            results = ddgs.text(key_words)
 
-    time.sleep(random.uniform(2, 3))
+        time.sleep(random.uniform(2, 3))
 
-    if not results:
-        return f"抱歉，没有找到与“{key_words}”相关的结果"
+        if not results:
+            return f"抱歉，没有找到与“{key_words}”相关的结果"
 
-    output_lines = [f"搜索关键词：{key_words}\n"]
-    for i, r in enumerate(results, 1):
-        output_lines.append(f"{i}. {r['title']}")
-        output_lines.append(f"   链接：{r['href']}")
-        output_lines.append(f"   摘要：{r['body']}")
-        output_lines.append("")
+        output_lines = [f"搜索关键词：{key_words}\n"]
+        for i, r in enumerate(results, 1):
+            output_lines.append(f"{i}. {r['title']}")
+            output_lines.append(f"   链接：{r['href']}")
+            output_lines.append(f"   摘要：{r['body']}")
+            output_lines.append("")
 
-    return "\n".join(output_lines)
+        return "\n".join(output_lines)
+
+    except DDGSException as e:
+        return e.__str__()

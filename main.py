@@ -21,7 +21,8 @@ engine.create_agent(key=("system", "search"),
                     description="""可以帮你查资料的助手，有疑问都可以问""",
                     prompt=search_prompt,
                     tools=[web_search, crawl, read_pages],
-                    sub_agents=[])
+                    sub_agents=[],
+                    rm_rf_memory=True)
 
 def run():
     engine.run(history_queue=history_queue, input_queue=input_queue, key=("system", "main"))

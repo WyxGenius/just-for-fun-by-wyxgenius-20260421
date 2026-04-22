@@ -23,6 +23,8 @@ def crawl(target_url: str) -> str:
     这个工具用于访问指定网址。
     如果访问成功了，你就可以使用 `read_pages` 工具一页一页地阅读网页了。
 
+    - 千万不能**连续拉取**，否则上次拉取的网页内容会被覆盖
+
     :param target_url: 指定网址
     :return: 访问状态
     """
